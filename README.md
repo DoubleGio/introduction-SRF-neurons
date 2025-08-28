@@ -12,5 +12,3 @@ This repository contains two tutorial notebooks on the Simplified Resonate-and-F
 
 These tutorials assume a basic understanding of Spiking Neural Networks (SNNs) and their dynamics.
 For an introduction to SNNs, we recommend reading [*"Training Spiking Neural Networks Using Lessons from Deep Learning"* (2023)](https://ieeexplore.ieee.org/document/10242251), and the [accompanying tutorial series](https://snntorch.readthedocs.io/en/latest/tutorials/index.html).
-
-Contact: [gig2@leicester.ac.uk](gig2@leicester.ac.uk)
