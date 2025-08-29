@@ -79,6 +79,15 @@ def snn_plot(
     if title:
         ax[ax_count].set_title(title)
 
+    if vline is not None:
+        if isinstance(vline, (list, np.ndarray)):
+            for a in ax:
+                if isinstance(vline, (list, np.ndarray)):
+                    for v in vline:
+                        a.axvline(v, color="black", linestyle="--", alpha=0.25, linewidth=1)
+                else:
+                    a.axvline(vline, color="black", linestyle="--", alpha=0.25, linewidth=1)
+
     # Plot input spikes
     if spk_in.size > 0:
         _plot_spk(spk_in, ax[ax_count], c, output=False)
@@ -126,16 +135,6 @@ def snn_plot(
         _plot_spk(spk_out, ax[ax_count], c, output=True)
         ax_count += 1
 
-    if vline is not None:
-        for i in range(ax_count):
-            if isinstance(vline, (list, np.ndarray)):
-                for v in vline:
-                    ax[i].axvline(x=v, ymin=-0.5 if i != ax_count-1 else 0, clip_on=False,
-                                  ymax=1.5 if i != 0 else 1, color="black", linestyle="--", alpha=0.25, linewidth=1)
-            else:
-                ax[i].axvline(x=vline, ymin=-0.5 if i != ax_count-1 else 0, clip_on=False,
-                              ymax=1.5 if i != 0 else 1, color="black", linestyle="--", alpha=0.25, linewidth=1)
-        
     # Set xlabel only on the bottom time domain plot
     if len(ax) > 0:
         ax[-1].set_xlabel(f"Time steps \u0394t={dt}" if dt else "Time steps")
@@ -277,8 +276,7 @@ def _plot_single_phase_portrait(
     elif isinstance(xylim, (int, float)):
         xylim = [-xylim, xylim]
     x, y = mem[trace_idx].real, mem[trace_idx].imag
-    trace, = ax.plot(x, y, c=color, alpha=0.8, 
-                     label=(f"$U_{{\\rm mem {trace_idx+1}}}$" if mem.shape[0] > 1 else "$U_{mem}$"))
+    trace, = ax.plot(x, y, c=color, alpha=0.8, label=(f"$U_{{\\rm mem {trace_idx+1}}}$" if mem.shape[0] > 1 else "$U_{\\rm mem}$"))
     start, = ax.plot(x[0], y[0], 'o', c=color, markersize=5, markeredgecolor="black", markeredgewidth=0.75, label="Start")
     # ax.plot(x[-1], y[-1], 's', c=color, markersize=4, markeredgecolor="black", markeredgewidth=0.75, label="End")
     
