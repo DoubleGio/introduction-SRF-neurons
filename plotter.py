@@ -79,15 +79,6 @@ def snn_plot(
     if title:
         ax[ax_count].set_title(title)
 
-    if vline is not None:
-        if isinstance(vline, (list, np.ndarray)):
-            for a in ax:
-                if isinstance(vline, (list, np.ndarray)):
-                    for v in vline:
-                        a.axvline(v, color="black", linestyle="--", alpha=0.25, linewidth=1)
-                else:
-                    a.axvline(vline, color="black", linestyle="--", alpha=0.25, linewidth=1)
-
     # Plot input spikes
     if spk_in.size > 0:
         _plot_spk(spk_in, ax[ax_count], c, output=False)
@@ -139,6 +130,15 @@ def snn_plot(
     if len(ax) > 0:
         ax[-1].set_xlabel(f"Time steps \u0394t={dt}" if dt else "Time steps")
     
+    if vline is not None:
+        if isinstance(vline, (list, np.ndarray)):
+            for a in ax:
+                if isinstance(vline, (list, np.ndarray)):
+                    for v in vline:
+                        a.axvline(v, color="black", linestyle="--", alpha=0.25, linewidth=1)
+                else:
+                    a.axvline(vline, color="black", linestyle="--", alpha=0.25, linewidth=1)
+
     # Add labels to phase portraits
     if phase_portrait:
         for i, phase_ax in enumerate(ax_phase):
@@ -164,13 +164,17 @@ def _set_ylim(ylim, ax, trace_idx=None):
             else:
                 ax.set_ylim([-ylim[trace_idx], ylim[trace_idx]])
         elif ylim.ndim == 1:
-            if len(ylim) == 2:
+            if trace_idx is not None:
+                ax.set_ylim([-ylim[trace_idx], ylim[trace_idx]])
+            elif len(ylim) == 2:
                 ax.set_ylim([ylim[0], ylim[1]])
             else:
                 ax.set_ylim([-ylim[0], ylim[0]])
         else:
             raise ValueError(f"Unsupported `ylim` np.ndarray shape: {ylim.shape}")
     elif isinstance(ylim, list):
+        if len(ylim) != 2:
+            raise ValueError(f"`ylim` list must have len 2, got {len(ylim)}")
         ax.set_ylim([ylim[0], ylim[1]])
     elif isinstance(ylim, int) or isinstance(ylim, float):
         ax.set_ylim([-ylim, ylim])
