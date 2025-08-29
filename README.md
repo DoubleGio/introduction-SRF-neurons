@@ -11,4 +11,10 @@ This repository contains two tutorial notebooks on the Simplified Resonate-and-F
    - Simplify the mathematical formulation of the RF neuron model to be more practical and accessible.
 
 These tutorials assume a basic understanding of Spiking Neural Networks (SNNs) and their dynamics.
-For an introduction to SNNs, we recommend reading [*"Training Spiking Neural Networks Using Lessons from Deep Learning"* (2023)](https://ieeexplore.ieee.org/document/10242251), and the [accompanying tutorial series](https://snntorch.readthedocs.io/en/latest/tutorials/index.html).
+For an introduction to SNNs, we recommend reading [*"Training Spiking Neural Networks Using Lessons from Deep Learning,"* (2023)](https://ieeexplore.ieee.org/document/10242251), and the [accompanying tutorial series](https://snntorch.readthedocs.io/en/latest/tutorials/index.html). 
+
+Further reading about resonating neurons:
+
+* [G. Orchard et al., *Efficient Neuromorphic Signal Processing with Loihi 2,* (2021)](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9605018)
+* [Lehmann et al., *Direct Signal Encoding With Analog Resonate-and-Fire Neurons,* (2023)](https://ieeexplore.ieee.org/document/10129852/)
+* [Kudithipudi et al., *Neuromorphic computing at scale,* (2025)](https://www.nature.com/articles/s41586-024-08253-8)
